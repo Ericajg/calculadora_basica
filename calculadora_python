@@ -1,11 +1,102 @@
-from tkinter import Tk,Entry,Button
-ventana=Tk()
-ventana.configure(background="#f17a0a")
-ventana.title("Calculadora Python")
-ventana.geometry("300x350")
-ventana.resizable(0,0)
+from tkinter import Tk, Entry, Button, Label, StringVar
 
-datos=Entry(ventana, font=("Arial", 20), bg="#f17a0a", fg="white", bd=0, justify="right")
-dtos.grid(row=0, column=0, columnspan=4, padx=10, pady=10)
+
+
+digito=''  # variable global para almacenar los digitos ingresados
+#---------funcion-----
+def tomar_digito(n):
+    global digito
+    digito += str(n)
+    calculo.set(digito)
+    
+def resultado():
+    try:
+        global digito
+        total = str(eval(digito))
+        calculo.set(total)
+        digito = ''
+    except:
+        calculo.set('**ERROR**')
+
+def limpiar_completo():
+    global digito
+    calculo.set('')
+    digito = ''
+
+#--------- creamos la ventana-----------
+ventana = Tk()
+ventana.title("CALCULADORA BASICA")
+ventana.geometry("340x350")
+ventana.configure(bg="#f17a0a")
+ventana.resizable(0, 0)
+
+#---------variables-------
+titulo = Label(ventana, text="CALCULADORA BASICA", font=("Arial", 16, "bold"), bg="#829CF1", fg="black")
+titulo.grid(row=0, column=0, columnspan=4, pady=5)
+
+calculo = StringVar()
+datos = Entry(ventana, bg="#f5e236", fg="black", font=("Arial", 16, "bold"), bd=3, relief="sunken", textvariable=calculo, command=resultado())
+datos.grid(columnspan=10, ipadx=70, ipady=10, padx=10, pady=10)
+
+boton1 = Button(ventana, text="1", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(1))
+boton1.grid(row=2, column=0, padx=(10,1), pady=1)
+
+
+boton2 = Button(ventana, text="2", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(2))
+boton2.grid(row=2, column=1, padx=0, pady=1)
+
+boton3 = Button(ventana, text="3", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(3))
+boton3.grid(row=2, column=2, padx=0, pady=1)
+
+boton_s = Button(ventana, text="+", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito('+'))
+boton_s.grid(row=2, column=3, padx=1, pady=1)
+
+boton4 = Button(ventana, text="4", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(4))
+boton4.grid(row=3, column=0, padx=(10,1), pady=1)
+
+boton5 = Button(ventana, text="5", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(5))
+boton5.grid(row=3, column=1, padx=0, pady=1)
+
+boton6 = Button(ventana, text="6", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(6))
+boton6.grid(row=3, column=2, padx=0, pady=1)
+
+boton_r = Button(ventana, text="-", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito('-'))
+boton_r.grid(row=3, column=3, padx=0, pady=1)
+
+boton7 = Button(ventana, text="7", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(7))
+boton7.grid(row=4, column=0, padx=(10,1), pady=1)
+
+boton8 = Button(ventana, text="8", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(8))
+boton8.grid(row=4, column=1, padx=0, pady=1)
+
+boton9 = Button(ventana, text="9", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(9))
+boton9.grid(row=4, column=2, padx=0, pady=1)
+
+boton_m = Button(ventana, text="x", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito('*'))
+boton_m.grid(row=4, column=3, padx=0, pady=1)
+
+boton0 = Button(ventana, text="0", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(0))
+boton0.grid(row=5, column=0, padx=(10,1), pady=1)
+
+
+boton_punto = Button(ventana, text=".", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito('.'))
+boton_punto.grid(row=5, column=1, padx=4, pady=1)
+
+boton_clear = Button(ventana, text="clear", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: limpiar_completo())
+boton_clear.grid(row=5, column=2, padx=0, pady=1)
+
+boton_d = Button(ventana, text="/", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito('/'))
+boton_d.grid(row=5, column=3, padx=0, pady=1)
+
+boton_p1 = Button(ventana, text="(", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito('('))
+boton_p1.grid(row=6, column=0, padx=(10,1), pady=1)
+
+boton_igual = Button(ventana, text="=", width=20, height=2, bg="#ff7d04", fg="white", bd=2, command=lambda:resultado())
+boton_igual.grid(row=6, column=1, columnspan=2, padx=6, pady=1)
+
+boton_p2 = Button(ventana, text=")", width=8, height=2, bg="#f89b44", fg="white", bd=2, command=lambda: tomar_digito(')'))
+boton_p2.grid(row=6, column=3, padx=0, pady=1)
+
+
 
 ventana.mainloop()
